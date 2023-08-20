@@ -5,11 +5,10 @@ const {
     login,
     userInfo
 } = require("../controllers/userController")
+const validateToken = require("../middleware/validateTokenHandler")
 
-router.get("/", userInfo)
-
+router.get("/", validateToken, userInfo)
 router.post("/register",  register)
-
 router.post("/login", login)
 
 

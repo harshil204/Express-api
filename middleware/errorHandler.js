@@ -14,6 +14,24 @@ const errorHandler = (err, req, res, next) => {
             })
             break;
 
+        case constants.CONFLICT:
+            res.json({
+                code: statusCode,
+                title: "Conflict",
+                message: err.message,
+                stackTrace: err.stack
+            })
+            break;
+
+        case constants.UNPROCESSABLE_CONTENT:
+            res.json({
+                code: statusCode,
+                title: "Unprocessable Content",
+                message: err.message,
+                stackTrace: err.stack
+            })
+            break;
+
         case constants.NOT_FOUND:
             res.json({
                 code: statusCode,
