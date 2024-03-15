@@ -51,7 +51,7 @@ const login = asyncHandler(async (req, res) => {
         res.status(400)
         throw new Error("All fields are mendatory!")
     }
-    const user = await User.findOne({ email })
+    let user = await User.findOne({ email })
     if (user && (await brcrypt.compare(password, user.password))) {
         const accessToken = jwt.sign({
             user: {
@@ -64,7 +64,7 @@ const login = asyncHandler(async (req, res) => {
             process.env.ACCESS_TOKEN_SECRET,
             { expiresIn: "30m" }
         )
-        res.status(200).json({ token: accessToken })
+        res.status(200).json({ token: accessToken, user })
     } else {
         res.status(401)
         throw new Error("Email or password is not valid")
