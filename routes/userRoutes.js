@@ -12,7 +12,7 @@ const validateToken = require("../middleware/validateTokenHandler");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "profile_img/");
+    cb(null, "public/profile_img/");
   },
   filename: function (req, file, cb) {
     console.log("console from multer function ==> ", req?.params?.id);

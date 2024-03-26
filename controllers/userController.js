@@ -59,7 +59,14 @@ const login = asyncHandler(async (req, res) => {
       { expiresIn: "60m" }
     );
 
-    res.status(200).json({ token: accessToken });
+    let filteredUser = {
+      id: user?.id,
+      name: user?.firstname + " " + user?.lastname,
+      email: user?.email,
+      role: user?.role,
+      profile_img: user?.profile_img,
+    };
+    res.status(200).json({ token: accessToken, user: filteredUser });
   } else {
     res.status(401);
     throw new Error("Email or password is not valid");
@@ -81,7 +88,7 @@ const updateProfile = asyncHandler(async (req, res) => {
     { _id: req?.params?.id },
     {
       $set: {
-        profile_img: `/profile_img/${req?.params?.id}"-"${req?.file?.originalname} }`,
+        profile_img: `/profile_img/${req?.params?.id}-${req?.file?.originalname}`,
       },
     }
   );

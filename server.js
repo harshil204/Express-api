@@ -12,6 +12,7 @@ connectDB();
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static('public'))
 app.use("/api/user", require("./routes/userRoutes"));
 app.use("/api/contacts", require("./routes/contactRoutes"));
 app.use("/api/expenses", require("./routes/expenseRoutes"));
